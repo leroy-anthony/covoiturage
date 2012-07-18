@@ -1,13 +1,35 @@
 class UrlMappings {
 
 	static mappings = {
+		
+		/* 
+		 * Pages without controller 
+		 */
+//		"/"				(view:"/index")
+		"/about"		(view:"/siteinfo/about")
+		"/systeminfo"	(view:"/siteinfo/systeminfo")
+		"/contact"		(view:"/siteinfo/contact")
+		"/terms"		(view:"/siteinfo/terms")
+		"/imprint"		(view:"/siteinfo/imprint")
+		
+		/* 
+		 * Pages with controller
+		 * WARN: No domain/controller should be named "api" or "mobile" or "web"!
+		 */
+        "/"	{
+			controller	= 'home'
+			action		= { 'index' }
+            view		= { 'index' }
+        }
 		"/$controller/$action?/$id?"{
 			constraints {
-				// apply constraints here
-			}
+				controller(matches:/^((?!(api|mobile|web)).*)$/)
+		  	}
 		}
-
-		"/"(view:"/index")
-		"500"(view:'/error')
+		
+		/* 
+		 * System Pages without controller 
+		 */
+		"500"	(view:'/error')
 	}
 }
